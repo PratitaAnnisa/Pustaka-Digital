@@ -1,15 +1,16 @@
 <?php
 session_start();
 include 'config/koneksi.php';
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit();
 }
+
 $username = $_SESSION['username'];
 $query = "SELECT * FROM users WHERE username = '$username'";
 $result = mysqli_query($koneksi, $query);
 $user = mysqli_fetch_assoc($result);
-$query_buku = "SELECT * FROM buku";
+$query_buku = "SELECT * FROM koleksi";
 $result_buku = mysqli_query($koneksi, $query_buku);
 ?>
 
@@ -23,7 +24,7 @@ $result_buku = mysqli_query($koneksi, $query_buku);
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Koleksi Buku</title>
 </head>
-<body style="background-color: blue;">
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">Pustaka Digital</a>
@@ -51,15 +52,16 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                 </tr>
             </thead>
             <tbody>
-                <?php while ($buku = mysqli_fetch_assoc($result_buku)) { ?>
                 <tr>
+                <?php while ($buku = mysqli_fetch_assoc($result_buku)) { ?>
                     <td><?php echo $buku['id']; ?></td>
                     <td><?php echo $buku['kode_buku']; ?></td> 
-                    <td><?php echo $buku['judul']; ?></td>
-                    <td><?php echo $buku['penulis']; ?></td>
+                    <td><?php echo $buku['judul_buku']; ?></td>
+                    <td><?php echo $buku['pengarang']; ?></td>
                     <td><?php echo $buku['kategori']; ?></td>
                     <td><?php echo $buku['stok']; ?></td>
-                    <td><?php echo $buku['status']; ?></td>
+                <?php $status = ($buku['stok'] == 0) ? 'Habis' : (($buku['stok'] <= 5) ? 'Menipis' : 'Tersedia');
+                    echo "<td>$status</td>";?>
                     <td>
                         <a href="edit_buku.php?id=<?php echo $buku['id']; ?>" class="btn btn-success btn-sm">Edit</a>
                         <a href="hapus_buku.php?id=<?php echo $buku['id']; ?>" class="btn btn-warning btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">Hapus</a>
@@ -67,7 +69,6 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                 </tr>
                 <?php } ?>
             </tbody>
-
     </div>
 </body>
 </html>

@@ -2,27 +2,23 @@
 session_start();
 include 'config/koneksi.php';
 
-if (isset($_SESSION['username'])) {
-    header("Location: koleksi_buku.php");
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
     $result = mysqli_query($koneksi, $query);
 
-    if (mysqli_num_rows($result) === 1) {
-        $_SESSION['username'] = $username;
+    if (mysqli_num_rows($result) > 0) {
+        $_SESSION['login'] = true;
         header("Location: koleksi_buku.php");
-        exit();
+        exit;
     } else {
-        echo "Login gagal: Username atau password salah.";
+        echo "Username atau password salah!";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
