@@ -270,7 +270,7 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             <a href="peminjaman.php?kembalikan=<?php echo $pinjam['id']; ?>"
-                                               class="btn btn-primary">Ya, Kembalikan</a>
+                                               class="btn btn-primary">Konfirmasi</a>
                                         </div>
                                     </div>
                                 </div>

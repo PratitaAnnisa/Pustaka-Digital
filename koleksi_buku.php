@@ -95,10 +95,10 @@ $result_buku = mysqli_query($koneksi, $query_buku);
         </div>
     </nav>
     <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Koleksi Buku</h2>
+        <h2 class="text-center mb-3">Koleksi Buku</h2>
+        <div class="d-flex justify-content-end mb-2">
             <!-- Tombol untuk membuka modal -->
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#tambahBuku">+ Tambah Koleksi</button>
+            <button type="button" class="btn btn-secondary mb-10" data-bs-toggle="modal" data-bs-target="#tambahBuku">+ Tambah Koleksi</button>
 
             <!-- Modal -->
             <div class="modal fade" id="tambahBuku" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -155,8 +155,8 @@ $result_buku = mysqli_query($koneksi, $query_buku);
             </div>
 
         </div>
-        <table class="table table-bordered table-stripped text-center">
-            <thead>
+        <table class="table table-bordered table-stripped">
+            <thead >
                 <tr>
                     <th>ID</th>
                     <th>Kode Buku</th>
