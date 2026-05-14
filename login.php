@@ -51,16 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h2 class="card-title text-center">Pustaka Digital</h2>
             <p class="card-text text-center">Sistem Perpustakan Nasional</p>
             <form method="POST" action="">
-                <div class="alert alert-danger mt-3 text-center" role="alert">
                     <?php
                 if (isset($result) && mysqli_num_rows($result) > 0) {
                     $_SESSION['login'] = true;
                     header("Location: koleksi_buku.php");
                     exit();
                 } else if (isset($result)) {
-                    echo "Username atau Password salah!";
+                    echo "<div class='alert alert-danger mt-3 text-center' role='alert'>Username atau Password salah!</div>";
                 } ?>
-                </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
