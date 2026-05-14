@@ -169,7 +169,7 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                 </tr>
             </thead>
             <tbody>
-                <?php while ($buku = mysqli_fetch_assoc($result_buku)) { ?> <!-- digunakan untuk menampilkan data buku -->
+                <?php while ($buku = mysqli_fetch_assoc($result_buku)) { ?>
                 <tr>
                     <td><?php echo $buku['id']; ?></td> 
                     <td><?php echo $buku['kode_buku']; ?></td> 
@@ -177,8 +177,8 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                     <td><?php echo $buku['pengarang']; ?></td>
                     <td><?php echo $buku['kategori']; ?></td>
                     <td><?php echo $buku['stok']; ?></td>
-                <?php $status = ($buku['stok'] > 5) ? 'Tersedia' : (($buku['stok'] <= 5) ? 'Menipis' : 'Habis');
-                    echo "<td>$status</td>";?>
+                        <?php $status = ($buku['stok'] > 5) ? 'Tersedia' : (($buku['stok'] <= 5 && $buku['stok'] > 0) ? 'Menipis' : ($buku['stok'] == 0 ? 'Habis' : ''));
+                        echo "<td>$status</td>";?>
                     <td>
                         <a href="edit.php?id=<?php echo $buku['id']; ?>" class="btn btn-success btn-sm">Edit</a>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#hapusbuku<?php echo $buku['id']; ?>">Hapus</button>
