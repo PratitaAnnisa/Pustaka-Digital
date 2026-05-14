@@ -8,14 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
     $result = mysqli_query($koneksi, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        $_SESSION['login'] = true;
-        header("Location: koleksi_buku.php");
-        exit;
-    } else {
-        echo "Username atau password salah!";
-    }
 }
 ?>
 
@@ -44,14 +36,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: #e7ecff;
         }
+        h2 {
+            font-weight: 600;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title">Pustaka Digital</h2>
-            <h3>Sistem Perpustakan Nasional</h3>
+            <h2 class="card-title text-center">Pustaka Digital</h2>
+            <p class="card-text text-center">Sistem Perpustakan Nasional</p>
             <form method="POST" action="">
+                <div class="alert alert-danger mt-3 text-center" role="alert">
+                    <?php
+                if (isset($result) && mysqli_num_rows($result) > 0) {
+                    $_SESSION['login'] = true;
+                    header("Location: koleksi_buku.php");
+                    exit();
+                } else if (isset($result)) {
+                    echo "Username atau Password salah!";
+                } ?>
+                </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
