@@ -39,7 +39,7 @@ if (isset($_POST['submit_pinjam'])) {
                      WHERE id = '$id_buku'";
         mysqli_query($koneksi, $q_status);
 
-        header("Location: peminjaman.php");
+        header("Location: peminjaman.php"); 
         exit();
     } else {
         echo "Error: " . mysqli_error($koneksi);
@@ -114,12 +114,10 @@ $result_buku = mysqli_query($koneksi, $query_buku);
             background-color: #ffffff;
             color: black;
         }
-        .btn-primary:hover  { background-color: #0056b3; }
-        .btn-secondary:hover{ background-color: #5a6268; }
-        .btn-danger:hover   { background-color: #c82333; }
-
-        .badge-dipinjam     { color: #000; }
-        .badge-dikembalikan { color: #000; }
+        .modal-footer .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
         .badge-terlambat    { background-color: #dc3545; color: #fff; }
     </style>
 </head>
@@ -205,10 +203,10 @@ $result_buku = mysqli_query($koneksi, $query_buku);
             </div>
         </div>
 
-        <table class="table table-bordered table-striped text-center">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th >No</th>
                     <th>Kode Peminjaman</th>
                     <th>Peminjam</th>
                     <th>Judul Buku</th>
@@ -239,9 +237,11 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                     <td><?php echo $pinjam['tgl_pinjam']; ?></td>
                     <td><?php echo $pinjam['tgl_kembali']; ?></td>
                     <td>
-                        <span class="badge <?php echo $badge; ?> px-2 py-1 rounded">
-                            <?php echo $status; ?>
-                        </span>
+                        <?php if ($status == 'Terlambat') { ?>
+                            <span class="badge bg-danger px-2 py-1 rounded">Terlambat</span>
+                        <?php } else { ?>
+                            <p><?php echo $status; ?></p>
+                        <?php } ?>
                     </td>
                     <td>
                         <?php if ($status == 'Dikembalikan') { ?>
