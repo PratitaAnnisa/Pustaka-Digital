@@ -13,13 +13,7 @@ if (isset($_GET['id'])) {
         echo "Buku berhasil dihapus.";
         header("Location: koleksi_buku.php");
         exit();
-    } else {
-        // Jika terjadi kesalahan, tampilkan pesan error
-        echo "Error: " . mysqli_error($koneksi);
     }
 } else {
-    // Jika tidak ada ID yang diberikan, arahkan kembali ke halaman daftar buku
-    echo "Buku gagal dihapus.";
-    header("Location: koleksi_buku.php");
-    exit();
+    echo "Error: " . mysqli_error($koneksi);
 }

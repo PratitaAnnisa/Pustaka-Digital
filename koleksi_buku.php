@@ -6,7 +6,6 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 
-//$username = $_SESSION['username'];
 $query = "SELECT * FROM users WHERE username = '$username'";
 $result = mysqli_query($koneksi, $query);
 $user = mysqli_fetch_assoc($result);
@@ -181,7 +180,7 @@ $result_buku = mysqli_query($koneksi, $query_buku);
                 <?php $status = ($buku['stok'] > 5) ? 'Tersedia' : (($buku['stok'] <= 5) ? 'Menipis' : 'Habis');
                     echo "<td>$status</td>";?>
                     <td>
-                        <a href="edit_buku.php?id=<?php echo $buku['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                        <a href="edit.php?id=<?php echo $buku['id']; ?>" class="btn btn-success btn-sm">Edit</a>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#hapusbuku<?php echo $buku['id']; ?>">Hapus</button>
                           <div class="modal fade" id="hapusbuku<?php echo $buku['id']; ?>" tabindex="-1" aria-labelledby="hapusBukuLabel" aria-hidden="true">
                               <div class="modal-dialog">
