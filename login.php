@@ -60,11 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo "<div class='alert alert-danger mt-3 text-center' role='alert'>Username atau Password salah!</div>";
                 } ?>
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="username" class="form-label">Username</label> <!-- username: pratita -->
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password</label> <!-- password: 124250014 -->
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Masuk</button>
